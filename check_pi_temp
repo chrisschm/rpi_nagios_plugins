@@ -1,0 +1,40 @@
+#!/bin/bash
+#
+# check_pi_temp: Check Raspberry Pi temperature
+#
+
+temp_input=$(cat /sys/class/thermal/thermal_zone0/temp)
+
+temp=$(($temp_input/1000))
+
+while getopts w:c: option
+do
+        case "${option}"
+        in
+                w) thresh_warn=${OPTARG};;
+                c) thresh_crit=${OPTARG};;
+        esac
+done
+
+
+if [ $temp -ge $thresh_warn ] && [ $temp -le $thresh_crit ]; then
+
+        echo "WARNING - CPU: $temp °C | 'CPU Temperatur'=$temp,$thresh_warn,$thresh_crit"
+        exit 1
+
+elif [ $temp -ge $thresh_crit ]; then
+
+        echo "CRITICAL - CPU: $temp °C | 'CPU Temperatur'=$temp,$thresh_warn,$thresh_crit"
+        exit 2
+
+elif [ $temp -lt $thresh_warn ]; then
+
+        echo "OK - CPU: $temp °C | 'CPU Temperatur'=$temp,$thresh_warn,$thresh_crit"
+        exit 0
+
+else
+
+        echo "UNKNOWN - No Data"
+        exit 3
+
+fi
