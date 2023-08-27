@@ -1,0 +1,32 @@
+#!/bin/bash
+#
+# check_pi_arm_clock: Check Raspberry Pi CPU frequency
+#
+
+#temp_input=$(cat /sys/devices/system/cpu/cpu0/cpufreq/cpuinfo_cur_freq)
+temp_input=$(vcgencmd measure_clock arm)
+temp=${temp_input##*=}
+cpuinfo_cur_freq=$(($temp/1000/1000))
+
+temp_input=$(vcgencmd get_config arm_freq)
+cpuinfo_max_freq=${temp_input##*=}
+
+
+ #'label'=value[UOM];[warn];[crit]
+
+if [ $cpuinfo_cur_freq -ge $cpuinfo_max_freq ]; then
+
+        echo "WARNING - CPU: $cpuinfo_cur_freq Mhz | 'CPU frequency'=$cpuinfo_cur_freq,$cpuinfo_max_freq,"
+        exit 0
+
+elif [ $cpuinfo_cur_freq -lt $cpuinfo_max_freq ]; then
+
+        echo "OK - CPU: $cpuinfo_cur_freq Mhz | 'CPU frequency'=$cpuinfo_cur_freq,$cpuinfo_max_freq,"
+        exit 0
+
+else
+
+        echo "UNKNOWN - No Data"
+        exit 3
+
+fi
