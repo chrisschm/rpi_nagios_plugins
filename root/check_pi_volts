@@ -1,0 +1,10 @@
+#!/bin/bash
+#
+# check_pi_arm_clock: Check Raspberry Pi Volts
+#
+
+temp_input=$(vcgencmd measure_volts)
+measure_volts=${temp_input##*=}
+
+echo "OK - Volts: $measure_volts V | Volts=$measure_volts
+exit 0
