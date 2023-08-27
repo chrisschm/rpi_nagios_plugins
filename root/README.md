@@ -18,7 +18,7 @@ Defaults:nagios !requiretty
 %nagios ALL=(ALL) NOPASSWD: /usr/local/nagios/libexec/
 ```
 
-Copy the content from [commands.cfg](root/commands.cfg) into <code>/usr/local/nagios/objects/commands.cfg</code> and take care its uncommented in <code>/usr/local/nagios/etc/nagios.cfg</code>.
+Copy the content from [commands.cfg](blob/main/root/commands.cfg) into <code>/usr/local/nagios/objects/commands.cfg</code> and take care its uncommented in <code>/usr/local/nagios/etc/nagios.cfg</code>.
 
 ```
 # You can specify individual object config files as shown below:
