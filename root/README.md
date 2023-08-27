@@ -25,4 +25,10 @@ Copy the content from [commands.cfg](https://github.com/chrisschm/rpi_nagios_plu
 cfg_file=/usr/local/nagios/etc/objects/commands.cfg
 ```
 
+Copy all check pi files into plugins directory.
+
+```
+cp check_pi_* /usr/local/nagios/libexec/
+```
+
 Now it could be used in any host.cfg file as the module needs.
