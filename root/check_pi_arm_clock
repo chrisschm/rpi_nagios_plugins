@@ -16,12 +16,12 @@ cpuinfo_max_freq=${temp_input##*=}
 
 if [ $cpuinfo_cur_freq -ge $cpuinfo_max_freq ]; then
 
-        echo "WARNING - CPU: $cpuinfo_cur_freq Mhz | 'CPU frequency'=$cpuinfo_cur_freq,$cpuinfo_max_freq,"
+        echo "WARNING - CPU: $cpuinfo_cur_freq Mhz | 'CPU frequency'=$cpuinfo_cur_freq;$cpuinfo_max_freq;"
         exit 0
 
 elif [ $cpuinfo_cur_freq -lt $cpuinfo_max_freq ]; then
 
-        echo "OK - CPU: $cpuinfo_cur_freq Mhz | 'CPU frequency'=$cpuinfo_cur_freq,$cpuinfo_max_freq,"
+        echo "OK - CPU: $cpuinfo_cur_freq Mhz | 'CPU frequency'=$cpuinfo_cur_freq;$cpuinfo_max_freq;"
         exit 0
 
 else
