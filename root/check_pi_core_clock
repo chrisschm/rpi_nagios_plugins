@@ -1,0 +1,31 @@
+#!/bin/bash
+#
+# check_pi_core_clock: Check Raspberry Pi GPU Core frequency
+#
+
+temp_input=$(vcgencmd measure_clock core)
+temp=${temp_input##*=}
+gpucore_cur_freq=$(($temp/1000/1000))
+
+temp_input=$(vcgencmd get_config core_freq)
+gpucore_max_freq=${temp_input##*=}
+
+temp_input=$(vcgencmd get_config core_freq_min)
+gpucore_min_freq=${temp_input##*=}
+
+if [ $gpucore_cur_freq -ge $gpucore_max_freq ]; then
+
+        echo "WARNING - CPU: $gpucore_cur_freq Mhz | 'CPU frequency'=$gpucore_cur_freq;;;$gpucore_min_freq;$gpucore_max_freq"
+        exit 0
+
+elif [ $gpucore_cur_freq -lt $gpucore_max_freq ]; then
+
+        echo "OK - CPU: $gpucore_cur_freq Mhz | 'CPU frequency'=$gpucore_cur_freq;;;$gpucore_min_freq;$gpucore_max_freq"
+        exit 0
+
+else
+
+        echo "UNKNOWN - No Data"
+        exit 3
+
+fi

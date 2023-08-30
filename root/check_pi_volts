@@ -6,5 +6,20 @@
 temp_input=$(vcgencmd measure_volts)
 measure_volts=${temp_input##*=}
 
+
+# core
+# VC4 core voltage
+
+# sdram_c
+# SDRAM Core Voltage
+
+# sdram_i
+# SDRAM I/O voltage
+
+# sdram_p
+# SDRAM Phy Voltage
+
+
+
 echo "OK - Volts: $measure_volts | Volts=$measure_volts"
 exit 0
