@@ -74,5 +74,5 @@ dpi_freq=$(($temp/1000/1000))
 
 
 
-echo "OK - CPU: $cpu_cur_freq Mhz | CPU=$cpu_cur_freq;;;0;$cpu_max_freq;GPU-Core=$gpucore_cur_freq;;;$gpucore_min_freq;$gpucore_max_freq;H264=$h264_freq;;;;;;ISP=$isp_freq;;;;;;V3D=$v3d_freq;;;;;;UART=$uart_freq;;;;;;PWM=$pwm_freq;;;;;;EMMC=$emmc_freq;;;;;;Pixel=$pixel_freq;;;;;;VEC=$vec_freq;;;;;;HDMI=$hdmi_freq;;;;;;DPI=$dpi_freq;;;;;"
+echo "OK - CPU: $cpu_cur_freq Mhz | CPU=$cpu_cur_freq;;;0;$cpu_max_freq;GPU-Core=$gpucore_cur_freq;;;$gpucore_min_freq;$gpucore_max_freq;H264=$h264_freq;;;;;ISP=$isp_freq;;;;;V3D=$v3d_freq;;;;;UART=$uart_freq;;;;;PWM=$pwm_freq;;;;;EMMC=$emmc_freq;;;;;Pixel=$pixel_freq;;;;;VEC=$vec_freq;;;;;HDMI=$hdmi_freq;;;;;DPI=$dpi_freq;;;;;"
 exit 0
