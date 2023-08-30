@@ -1,0 +1,78 @@
+#!/bin/bash
+#
+# check_pi_freqs: Check Raspberry Pi frequencies
+#
+
+### ARM core(s)
+temp_input=$(vcgencmd measure_clock arm)
+temp=${temp_input##*=}
+cpu_cur_freq=$(($temp/1000/1000))
+
+temp_input=$(vcgencmd get_config arm_freq)
+cpu_max_freq=${temp_input##*=}
+
+### GPU core
+temp_input=$(vcgencmd measure_clock core)
+temp=${temp_input##*=}
+gpucore_cur_freq=$(($temp/1000/1000))
+
+temp_input=$(vcgencmd get_config core_freq)
+gpucore_max_freq=${temp_input##*=}
+
+temp_input=$(vcgencmd get_config core_freq_min)
+gpucore_min_freq=${temp_input##*=}
+
+### H.264 block
+temp_input=$(vcgencmd measure_clock h264)
+temp=${temp_input##*=}
+h264_freq=$(($temp/1000/1000))
+
+### Image Sensor Pipeline
+temp_input=$(vcgencmd measure_clock isp)
+temp=${temp_input##*=}
+isp_freq=$(($temp/1000/1000))
+
+### Video 3D block
+temp_input=$(vcgencmd measure_clock v3d)
+temp=${temp_input##*=}
+v3d_freq=$(($temp/1000/1000))
+
+### UART
+temp_input=$(vcgencmd measure_clock uart)
+temp=${temp_input##*=}
+uart_freq=$(($temp/1000/1000))
+
+### PWM block (analogue audio output)
+temp_input=$(vcgencmd measure_clock pwm)
+temp=${temp_input##*=}
+pwm_freq=$(($temp/1000/1000))
+
+### SD card interface
+temp_input=$(vcgencmd measure_clock emmc)
+temp=${temp_input##*=}
+emmc_freq=$(($temp/1000/1000))
+
+### Pixel valves
+temp_input=$(vcgencmd measure_clock pixel)
+temp=${temp_input##*=}
+pixel_freq=$(($temp/1000/1000))
+
+### Analogue video encoder
+temp_input=$(vcgencmd measure_clock vec)
+temp=${temp_input##*=}
+vec_freq=$(($temp/1000/1000))
+
+### HDMI
+temp_input=$(vcgencmd measure_clock hdmi)
+temp=${temp_input##*=}
+hdmi_freq=$(($temp/1000/1000))
+
+### Display Parallel Interface
+temp_input=$(vcgencmd measure_clock dpi)
+temp=${temp_input##*=}
+dpi_freq=$(($temp/1000/1000))
+
+
+
+echo "OK - CPU: $cpu_cur_freq Mhz | CPU=$cpu_cur_freq;;;0;$cpu_max_freq;GPU-Core=$gpucore_cur_freq;;;$gpucore_min_freq;$gpucore_max_freq;H264=$h264_freq;;;;;;ISP=$isp_freq;;;;;;V3D=$v3d_freq;;;;;;UART=$uart_freq;;;;;;PWM=$pwm_freq;;;;;;EMMC=$emmc_freq;;;;;;Pixel=$pixel_freq;;;;;;VEC=$vec_freq;;;;;;HDMI=$hdmi_freq;;;;;;DPI=$dpi_freq;;;;;"
+exit 0
